@@ -9,8 +9,9 @@ describe 'Posts' do
 	end
 
 	context 'with posts' do
+		let(:jack) { create(:user) }
 		before do
-			Post.create title: 'First post', description: 'this is my first post ever'
+			jack.posts.create title: 'First post', description: 'this is my first post ever'
 		end
 
 		it 'post has a title' do

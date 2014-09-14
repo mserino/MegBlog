@@ -3,8 +3,9 @@ require 'rails_helper'
 describe 'Creating, editing and deleting posts' do
 
 	context 'while signed out' do
+		let(:cindy) { create(:user) }
 		before do
-			Post.create title: "Post", description: "Hello I'm a new post"
+			cindy.posts.create title: "Post", description: "Hello I'm a new post"
 		end
 
 		it 'cannot create new posts' do
