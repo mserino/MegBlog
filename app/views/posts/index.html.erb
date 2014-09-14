@@ -10,4 +10,12 @@
 <% else %>
 	<h1>No posts yet :(</h1>
 <% end %>
-<h2><%= link_to "New post", new_post_path %></h2>
+
+<% if current_user %>
+
+	<h2><%= link_to "New post", new_post_path %></h2>
+
+<% else %>
+	
+	<h2>You must be logged in to add new posts</h2>
+<% end %>
