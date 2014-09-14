@@ -26,4 +26,11 @@ class PostsController < ApplicationController
 	def post_params
 		params.require(:post).permit(:title, :description)
 	end
+
+	def destroy
+		@post = Post.find params[:id]
+		@post.destroy
+		redirect_to posts_path
+		flash[:notice] = "Post successfully deleted"
+	end
 end

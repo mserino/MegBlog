@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Post creation' do
+describe 'Creating, editing and deleting posts' do
 	before do
 		visit '/posts/new'
 		fill_in 'Title', with: 'Yo'
@@ -23,5 +23,12 @@ describe 'Post creation' do
 		expect(page).to have_content 'Try again'
 		expect(page).not_to have_content 'Yo'
 		expect(page).to have_content 'Post successfully updated'
+	end
+
+	it 'can delete a post' do
+		visit '/posts'
+		click_link 'Delete post'
+		expect(page).not_to have_content 'Yo'
+		expect(page).to have_content 'Post successfully deleted'
 	end
 end
