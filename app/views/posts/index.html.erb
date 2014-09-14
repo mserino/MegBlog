@@ -1,1 +1,9 @@
-<h1>No posts yet :(</h1>
+<% if @posts.any? %>
+	<% @posts.each do |post| %>
+
+		<p><%= post.title %></p>
+		<p><%= post.description %></p>
+	<% end %>
+<% else %>
+	<h1>No posts yet :(</h1>
+<% end %>
