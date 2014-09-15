@@ -1,0 +1,8 @@
+<% if @blogs.any? %>
+	<% @blogs.each do |blog| %>
+		<h1><%= link_to "#{blog.title}", blog_path(blog.id) %></h1>
+		<h2><%= blog.description %></h2>
+	<% end %>
+<% else %>
+	<h2>No blog</h2>
+<% end %>

@@ -9,7 +9,7 @@ describe 'Creating, editing and deleting posts' do
 		end
 
 		it 'cannot create new posts' do
-			visit '/'
+			visit '/posts'
 			expect(page).to have_content 'You must be logged in to add new posts'
 		end
 

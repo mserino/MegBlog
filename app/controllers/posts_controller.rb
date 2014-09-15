@@ -14,7 +14,7 @@ class PostsController < ApplicationController
 		@post.user = current_user
 		@post.save!
 		
-		redirect_to posts_path
+		redirect_to blog_posts_path
 	end
 
 	def edit
@@ -25,17 +25,17 @@ class PostsController < ApplicationController
 		@post = Post.find params[:id]
 		@post.update post_params
 		flash[:notice] = "Post successfully updated"
-    redirect_to posts_path
-	end
-
-	def post_params
-		params.require(:post).permit(:title, :description)
+    redirect_to blog_posts_path
 	end
 
 	def destroy
 		@post = Post.find params[:id]
 		@post.destroy
-		redirect_to posts_path
+		redirect_to blog_posts_path
 		flash[:notice] = "Post successfully deleted"
+	end
+	
+	def post_params
+		params.require(:post).permit(:title, :description)
 	end
 end
