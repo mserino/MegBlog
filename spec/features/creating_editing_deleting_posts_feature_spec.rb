@@ -3,9 +3,11 @@ require 'rails_helper'
 describe 'Creating, editing and deleting posts' do
 
 	context 'while signed out' do
+
 		let(:cindy) { create(:user) }
+
 		before do
-			Blog.create title: "Pandas", description: "Blog about pandas"
+			blog = Blog.create title: "Pandas", description: "Blog about pandas"
 			login_as cindy
 			visit '/blogs'
 			click_link 'Pandas'
@@ -29,19 +31,19 @@ describe 'Creating, editing and deleting posts' do
 
 		it 'cannot create new posts at all' do
 			sign_out
-			visit '/blogs'
-			click_link "Pandas"
-			click_link "New post"
+			visit '/blogs/1/posts/new'
 			expect(page).to have_content 'You need to sign in or sign up before continuing.'
 		end
 
 		it 'cannot edit posts' do
+			sign_out
 			visit '/blogs/1/posts'
 			click_link 'Edit post'
 			expect(page).to have_content 'You need to sign in or sign up before continuing.'
 		end
 
 		it 'cannot delete posts' do
+			sign_out
 			visit '/blogs/1/posts'
 			click_link 'Delete post'
 			expect(page).to have_content 'You need to sign in or sign up before continuing.'
@@ -49,21 +51,25 @@ describe 'Creating, editing and deleting posts' do
 	end
 
 	context 'while signed in' do
-		let(:johndoe) { create(:user) }
+
+		let(:cindy) { create(:user) }
 
 		before do
-			login_as johndoe
-
-			visit '/blogs/1/posts/new'
-			fill_in 'Title', with: 'Yo'
-			fill_in 'Description', with: 'I am a superverycool post'
-			click_button 'Submit'
+			blog = Blog.create title: "Pandas", description: "Blog about pandas"
+			login_as cindy
+			visit '/blogs'
+			click_link 'Pandas'
+			click_link 'New post'
+				fill_in 'Title', with: "This is my new post"
+				fill_in 'Description', with: "Let's see what happens"
+				click_button 'Submit'
 		end
+		
 
 		it 'can create a post' do
-			expect(current_path).to eq blog_posts_path
-			expect(page).to have_content 'Yo'
-			expect(page).to have_content 'I am a superverycool post'
+			expect(current_path).to eq blog_posts_path(8)
+			expect(page).to have_content 'This is my new post'
+			expect(page).to have_content "Let's see what happens"
 		end
 
 		it 'can edit a post' do
@@ -71,9 +77,9 @@ describe 'Creating, editing and deleting posts' do
 			click_link 'Edit post'
 			fill_in 'Title', with: 'Try again'
 			click_button 'Submit'
-			expect(current_path).to eq blog_posts_path
+			expect(current_path).to eq blog_posts_path(9)
 			expect(page).to have_content 'Try again'
-			expect(page).not_to have_content 'Yo'
+			expect(page).not_to have_content 'This is my new post'
 			expect(page).to have_content 'Post successfully updated'
 		end
 
