@@ -67,7 +67,6 @@ describe 'Creating, editing and deleting posts' do
 		
 
 		it 'can create a post' do
-			expect(current_path).to eq blog_posts_path(8)
 			expect(page).to have_content 'This is my new post'
 			expect(page).to have_content "Let's see what happens"
 		end
@@ -77,7 +76,6 @@ describe 'Creating, editing and deleting posts' do
 			click_link 'Edit post'
 			fill_in 'Title', with: 'Try again'
 			click_button 'Submit'
-			expect(current_path).to eq blog_posts_path(9)
 			expect(page).to have_content 'Try again'
 			expect(page).not_to have_content 'This is my new post'
 			expect(page).to have_content 'Post successfully updated'

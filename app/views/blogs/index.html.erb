@@ -1,3 +1,13 @@
+<% if current_user %>
+
+	<h1><%= link_to "Add a new blog", new_blog_path(@blog) %></h1>
+
+<% else %>
+	
+	<h2>You must be logged in to create new blogs</h2>
+
+<% end %>
+
 <% if @blogs.any? %>
 	<% @blogs.each do |blog| %>
 		<h1><%= link_to "#{blog.title}", blog_path(blog.id) %></h1>

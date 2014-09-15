@@ -19,6 +19,11 @@ describe 'Blog' do
 			Blog.create title: "Aftermakers", description: "What I will learn after"
 		end
 
+		def sign_out
+			visit '/blogs'
+			click_link 'Sign out'
+		end
+
 		it 'shows the name of the blog' do
 			visit '/blogs'
 			expect(page).to have_content 'Aftermakers'
@@ -27,6 +32,24 @@ describe 'Blog' do
 		it 'shows the description' do
 			visit '/blogs'
 			expect(page).to have_content 'What I will learn after'
+		end
+
+		it 'cannot create the blog if signed out' do
+			sign_out
+			visit '/blogs'
+			expect(page).to have_content 'You must be logged in to create new blogs'
+			expect(page).not_to have_content "Add a new blog"
+		end
+
+		it 'can create a new blog only if signed in' do
+			visit '/blogs'
+			click_link "Add a new blog"
+			expect(current_path).to eq new_blog_path
+			fill_in "Title", with: "Koalas"
+			fill_in "Description", with: "Let's use all the animals in the world"
+			click_button "Submit"
+			expect(page).to have_content "Koalas"
+			expect(page).to have_content "Aftermakers"
 		end
 
 		it 'can create a post' do
