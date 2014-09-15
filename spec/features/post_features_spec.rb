@@ -2,9 +2,10 @@ require 'rails_helper'
 
 describe 'Posts' do
 	context 'no posts' do
+		let(:jack) { create(:user) }
 
 		before do
-			blog = Blog.create title: "Pandas", description: "Blog about pandas"
+			blog = jack.blogs.create title: "Pandas", description: "Blog about pandas"
 		end
 
 		it 'there are no posts' do
@@ -16,7 +17,7 @@ describe 'Posts' do
 	context 'with posts' do
 		let(:jack) { create(:user) }
 		before do
-			blog = Blog.create title: "Pandas", description: "Blog about pandas"
+			blog = jack.blogs.create title: "Pandas", description: "Blog about pandas"
 			login_as jack
 			visit '/blogs'
 			click_link 'Pandas'
@@ -37,16 +38,3 @@ describe 'Posts' do
 		end
 	end
 end
-
-		# let(:cindy) { create(:user) }
-
-		# before do
-		# 	blog = Blog.create title: "Pandas", description: "Blog about pandas"
-		# 	login_as cindy
-		# 	visit '/blogs'
-		# 	click_link 'Pandas'
-		# 	click_link 'New post'
-		# 		fill_in 'Title', with: "This is my new post"
-		# 		fill_in 'Description', with: "Let's see what happens"
-		# 		click_button 'Submit'
-		# end

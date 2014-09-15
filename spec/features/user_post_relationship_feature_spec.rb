@@ -4,7 +4,7 @@ describe 'User has a post' do
 	context 'logged in as the creator of the post' do
 		let(:janedoe) { create(:user) }
 		before do
-			blog = Blog.create title: "Pandas", description: "Blog about pandas"
+			blog = janedoe.blogs.create title: "Pandas", description: "Blog about pandas"
 			login_as janedoe
 			visit '/blogs'
 			click_link 'Pandas'

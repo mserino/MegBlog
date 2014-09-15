@@ -7,7 +7,7 @@ describe 'Creating, editing and deleting posts' do
 		let(:cindy) { create(:user) }
 
 		before do
-			blog = Blog.create title: "Pandas", description: "Blog about pandas"
+			blog = cindy.blogs.create title: "Pandas", description: "Blog about pandas"
 			login_as cindy
 			visit '/blogs'
 			click_link 'Pandas'
@@ -24,8 +24,7 @@ describe 'Creating, editing and deleting posts' do
 
 		it 'cannot create new posts' do
 			sign_out
-			visit '/blogs'
-			click_link "Pandas"
+			visit '/blogs/1/posts'
 			expect(page).to have_content 'You must be logged in to add new posts'
 		end
 
@@ -55,7 +54,7 @@ describe 'Creating, editing and deleting posts' do
 		let(:cindy) { create(:user) }
 
 		before do
-			blog = Blog.create title: "Pandas", description: "Blog about pandas"
+			blog = cindy.blogs.create title: "Pandas", description: "Blog about pandas"
 			login_as cindy
 			visit '/blogs'
 			click_link 'Pandas'

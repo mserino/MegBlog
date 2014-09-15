@@ -6,7 +6,10 @@ require 'database_cleaner'
 describe 'Blog' do
 
 	context 'no blogs' do
+		let(:user) {create(:user)}
+		
 		it 'there is no blog' do
+			login_as user
 			visit '/blogs'
 			expect(page).to have_content 'No blog'
 		end
@@ -16,7 +19,7 @@ describe 'Blog' do
 		let(:user) {create(:user)}
 		before do
 			login_as user
-			Blog.create title: "Aftermakers", description: "What I will learn after"
+			user.blogs.create title: "Aftermakers", description: "What I will learn after"
 		end
 
 		def sign_out

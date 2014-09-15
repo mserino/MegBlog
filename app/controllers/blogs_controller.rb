@@ -1,7 +1,9 @@
 class BlogsController < ApplicationController
+	before_action :authenticate_user!, except: [:index]
 
 	def index
 		@blogs = Blog.all
+		@users = User.all
 	end
 
 	def show
@@ -15,6 +17,7 @@ class BlogsController < ApplicationController
 
 	def create
 		@blog = Blog.new blog_params
+		@blog.user = current_user
 		@blog.save!
 		redirect_to blogs_path
 	end
