@@ -9,6 +9,7 @@ class BlogsController < ApplicationController
 	def show
 		@blog = Blog.find params[:id]
 		@posts = Post.all
+		redirect_to blog_posts_path(@blog.id)
 	end
 
 	def new

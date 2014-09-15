@@ -5,7 +5,7 @@ FactoryGirl.define do
     password  "1234567890"
     password_confirmation "1234567890"
   end
-
+  
   # johndoe = create(:user)
 
   # This will use the User class (Admin would have been guessed)

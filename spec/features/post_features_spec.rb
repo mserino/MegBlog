@@ -5,11 +5,11 @@ describe 'Posts' do
 		let(:jack) { create(:user) }
 
 		before do
-			blog = jack.blogs.create title: "Pandas", description: "Blog about pandas"
+			@blog = jack.blogs.create title: "Pandas", description: "Blog about pandas"
 		end
 
 		it 'there are no posts' do
-			visit '/blogs/1/posts'
+			visit blog_posts_path(@blog.id)
 			expect(page).to have_content "No posts yet :("
 		end
 	end
@@ -17,7 +17,7 @@ describe 'Posts' do
 	context 'with posts' do
 		let(:jack) { create(:user) }
 		before do
-			blog = jack.blogs.create title: "Pandas", description: "Blog about pandas"
+			@blog = jack.blogs.create title: "Pandas", description: "Blog about pandas"
 			login_as jack
 			visit '/blogs'
 			click_link 'Pandas'
@@ -28,12 +28,12 @@ describe 'Posts' do
 		end
 
 		it 'post has a title' do
-			visit '/blogs/1/posts'
+			visit blog_posts_path(@blog.id)
 			expect(page).to have_content 'This is my new post'
 		end
 
 		it 'post has a description' do
-			visit '/blogs/1/posts'
+			visit blog_posts_path(@blog.id)
 			expect(page).to have_content "Let's see what happens"
 		end
 	end
