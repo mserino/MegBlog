@@ -48,3 +48,5 @@ end
 gem 'devise'
 
 gem "factory_girl_rails", "~> 4.0"
+
+gem 'heroku_secrets', github: 'alexpeattie/heroku_secrets'
