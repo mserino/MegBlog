@@ -1,14 +1,10 @@
-<% if !current_user %>
+<% if !current_user || !owner? %>
 
 	<h2>You must be logged in to add new posts</h2>
 
 <% else %>
 	
-	<% if owner? %>
-	
 	<h2><%= link_to "New post", new_blog_post_path %></h2>
-
-	<% end %>
 
 <% end %>
 
