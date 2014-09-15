@@ -1,8 +1,10 @@
 require 'rails_helper'
+require 'database_cleaner'
 
 # User can have multiple blogs, a blog can have multiple posts
 
 describe 'Blog' do
+
 	context 'no blogs' do
 		it 'there is no blog' do
 			visit '/blogs'
@@ -28,10 +30,12 @@ describe 'Blog' do
 		end
 
 		it 'can create a post' do
-			visit '/blogs/1/posts/new'
-				fill_in 'Title', with: "This is my new post"
-				fill_in 'Description', with: "Let's see what happens"
-				click_button 'Submit'
+			visit '/blogs'
+			click_link "Aftermakers"
+			click_link "New post"
+			fill_in 'Title', with: "This is my new post"
+			fill_in 'Description', with: "Let's see what happens"
+			click_button 'Submit'
 			expect(page).to have_content "This is my new post"
 		end
 	end

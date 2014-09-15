@@ -12,6 +12,7 @@ class PostsController < ApplicationController
 	def create
 		@post = Post.new post_params
 		@post.user = current_user
+		@post.blog = Blog.find params[:blog_id]
 		@post.save!
 		
 		redirect_to blog_posts_path
@@ -23,9 +24,10 @@ class PostsController < ApplicationController
 
 	def update
 		@post = Post.find params[:id]
+		@post.blog = Blog.find params[:blog_id]
 		@post.update post_params
 		flash[:notice] = "Post successfully updated"
-    redirect_to blog_posts_path
+    redirect_to blog_posts_path(@post.blog.id)
 	end
 
 	def destroy

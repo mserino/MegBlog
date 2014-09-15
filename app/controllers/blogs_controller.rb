@@ -6,5 +6,6 @@ class BlogsController < ApplicationController
 
 	def show
 		@blog = Blog.find params[:id]
+		@posts = Post.all
 	end
 end

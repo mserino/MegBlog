@@ -1,15 +1,4 @@
-<% if @posts.any? %>
-	<% @posts.each do |post| %>
-
-		<h2><%= post.title %></h2>
-		<p><%= post.description %></p>
-		<p>Posted by <%= post.user.email %></p>
-		<p>Created at <%= post.created_at.strftime("%A %d %B %Y, %H:%M") %></p>
-
-	<% end %>
-<% else %>
-	<h1>No posts yet :(</h1>
-<% end %>
+<%= render 'posts' %>
 
 <% if current_user %>
 

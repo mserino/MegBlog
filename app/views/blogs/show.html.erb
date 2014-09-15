@@ -1,2 +1,11 @@
+<% if current_user %>
 
-<h2><%= link_to "New post", new_blog_post_path(@blog.id) %></h2>
+	<h2><%= link_to "New post", new_blog_post_path(@blog.id) %></h2>
+
+<% else %>
+	
+	<h2>You must be logged in to add new posts</h2>
+
+<% end %>
+
+<%= render 'posts/posts' %>
