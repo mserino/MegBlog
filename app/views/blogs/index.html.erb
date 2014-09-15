@@ -1,20 +1,42 @@
-<% if current_user %>
+<div class="center-block">
+	<div class="starter-template col-md-8">
+	<% if current_user %>
 
-	<h1><%= link_to "Add a new blog", new_blog_path(@blog) %></h1>
-
-<% else %>
-	
-	<h2>You must be logged in to create new blogs</h2>
-
-<% end %>
-
-	<% if @blogs.any? %>
-		
-	<% @blogs.each do |blog| %>
-			<h1><%= link_to "#{blog.title}", blog_path(blog.id) %> (<%= blog.user.email %>)</h1>
-			<h2><%= blog.description %></h2>
-		<% end %>
+		<h1><%= link_to "Add a new blog", new_blog_path(@blog), class: 'btn btn-primary' %></h1>
 
 	<% else %>
-		<h2>No blog</h2>
+		
+	  <p class="alert alert-info alert-dismissible">
+	  <button type="button" class="close" data-dismiss="alert"></button>
+	  You must be logged in to create new blogs</p>
+
 	<% end %>
+
+		<h1>Browse the blogs</h1>
+
+		<% if @blogs.any? %>
+			
+		<% @blogs.each do |blog| %>
+				<div class="panel panel-purple">
+					<div class="panel-heading">
+						<div class="panel-title">
+							<h4><%= link_to "#{blog.title}", blog_path(blog.id) %> <small>(<%= blog.user.email %>)</small></h4>
+						</div>
+					</div>
+					<div class="panel-body">
+						<p><%= blog.description %></p>
+					</div>
+				</div>
+			<% end %>
+
+		<% else %>
+
+			<div class="panel panel-purple">
+				<div class="panel-body">
+					<h2>No blog</h2>
+				</div>
+			</div>
+
+	<% end %>
+	</div>
+</div>
