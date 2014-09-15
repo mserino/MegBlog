@@ -15,7 +15,7 @@ class PostsController < ApplicationController
 		@post.blog = Blog.find params[:blog_id]
 		@post.save!
 		
-		redirect_to blog_posts_path
+		redirect_to blog_path(@post.blog.id)
 	end
 
 	def edit
@@ -27,7 +27,7 @@ class PostsController < ApplicationController
 		@post.blog = Blog.find params[:blog_id]
 		@post.update post_params
 		flash[:notice] = "Post successfully updated"
-    redirect_to blog_posts_path(@post.blog.id)
+    redirect_to blog_path(@post.blog.id)
 	end
 
 	def destroy
