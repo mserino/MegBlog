@@ -37,7 +37,8 @@ describe 'Creating, editing and deleting posts' do
 		it 'cannot edit posts' do
 			sign_out
 			visit blog_posts_path(@blog.id)
-			click_link 'Edit post'
+			find('.glyphicon-edit a').click
+			# click_link 'Edit post'
 			expect(page).to have_content 'You need to sign in or sign up before continuing.'
 		end
 

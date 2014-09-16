@@ -4,7 +4,7 @@ class PostsController < ApplicationController
 	def index
 		@posts = Post.all
 		@blog = Blog.find params[:blog_id]
-		@blog_posts = Post.where(blog_id: params[:blog_id])
+		@blog_posts = Post.where(blog_id: params[:blog_id]).order(created_at: :desc)
 	end
 
 	def new

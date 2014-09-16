@@ -10,7 +10,7 @@ describe 'Blog' do
 		
 		it 'there is no blog' do
 			login_as user
-			visit '/blogs'
+			visit blogs_path
 			expect(page).to have_content 'No blog'
 		end
 	end
@@ -20,11 +20,6 @@ describe 'Blog' do
 		before do
 			login_as user
 			user.blogs.create title: "Aftermakers", description: "What I will learn after"
-		end
-
-		def sign_out
-			visit '/blogs'
-			click_link 'Sign out'
 		end
 
 		it 'shows the name of the blog' do
