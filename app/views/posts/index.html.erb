@@ -11,17 +11,18 @@
 	</div>
 
 	<div class="col-xs-6 col-md-4">
-	   <% if !current_user || !owner? %>
+	   <% if !current_user %>
 
 			<p class="alert alert-warning alert-dismissible">
 			You must be logged in to add new posts
 			</p>
 
 		<% else %>
-			
-			<p>
-			<%= link_to "New post", new_blog_post_path, class: 'btn btn-success btn-block' %>
-			</p>
+			<% if owner? %>
+				<p>
+				<%= link_to "New post", new_blog_post_path, class: 'btn btn-success btn-block' %>
+				</p>
+			<% end %>
 
 		<% end %>
 
