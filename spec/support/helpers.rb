@@ -1,5 +1,4 @@
 module CapybaraHelper
-	
 	def create_post
 		visit blog_path(@blog.id)
 		click_link "New post"
@@ -20,5 +19,4 @@ module CapybaraHelper
 		visit '/blogs'
 		click_link 'Sign out'
 	end
-
 end
