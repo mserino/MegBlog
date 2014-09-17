@@ -5,10 +5,20 @@ class PostsController < ApplicationController
 		@posts = Post.all
 		@blog = Blog.find params[:blog_id]
 		@blog_posts = Post.where(blog_id: params[:blog_id]).order(created_at: :desc)
+		@post_months = @blog_posts.group_by{|t| t.created_at.beginning_of_month}
+		render :layout => 'blog_layout'
 	end
 
 	def new
 		@post = Post.new
+	end
+
+	def show
+		@post = Post.find params[:id]
+		@blog = Blog.find params[:blog_id]
+		@blog_posts = Post.where(blog_id: params[:blog_id]).order(created_at: :desc)
+		@post_months = @blog_posts.group_by{|t| t.created_at.beginning_of_month}
+		render :layout => 'blog_layout'
 	end
 
 	def create

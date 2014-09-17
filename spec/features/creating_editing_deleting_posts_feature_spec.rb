@@ -1,11 +1,6 @@
 require 'rails_helper'
 
 describe 'Creating, editing and deleting posts' do
-
-	def sign_out
-		visit '/'
-		click_link 'Sign out'
-	end
 	
 	context 'while signed out' do
 
@@ -37,17 +32,14 @@ describe 'Creating, editing and deleting posts' do
 		it 'cannot edit posts' do
 			sign_out
 			visit blog_posts_path(@blog.id)
-			find('.glyphicon-edit a').click
-			# click_link 'Edit post'
-			expect(page).to have_content 'You need to sign in or sign up before continuing.'
+			expect(page).not_to have_link 'edit'
 		end
 
 		it 'cannot delete posts' do
 			sign_out
 			visit blog_posts_path(@blog.id)
-			click_link 'Delete post'
-			expect(page).to have_content 'You need to sign in or sign up before continuing.'
-		end
+			expect(page).not_to have_link 'delete'
+			end
 	end
 
 	context 'while signed in' do
@@ -73,7 +65,7 @@ describe 'Creating, editing and deleting posts' do
 
 		it 'can edit a post' do
 			visit blog_posts_path(@blog.id)
-			click_link 'Edit post'
+			find("#post-edit").click
 			fill_in 'Title', with: 'Try again'
 			click_button 'Submit'
 			expect(page).to have_content 'Try again'
@@ -83,7 +75,7 @@ describe 'Creating, editing and deleting posts' do
 
 		it 'can delete a post' do
 			visit blog_posts_path(@blog.id)
-			click_link 'Delete post'
+			find("#post-delete").click
 			expect(page).not_to have_content 'Yo'
 			expect(page).to have_content 'Post successfully deleted'
 		end

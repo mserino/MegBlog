@@ -1,32 +1,9 @@
-<div class='container'>
-	<div class="well">
-		<h1 class="text-center">
-			<%= @blog.title %>
-		</h1>
-		<p class="text-center"><%= @blog.description %></p>
-	</div>
+<% if @blog_posts.any? %>
+	<% @blog_posts.each do |post| %>
 
-  <div class="starter-template col-xs-12 col-md-8">
+ 		<%= render 'post', post: post %>
 
-		<%= render 'posts' %>
-	</div>
-
-	<div class="col-xs-6 col-md-4">
-	   <% if !current_user %>
-
-			<p class="alert alert-warning alert-dismissible">
-			You must be logged in to add new posts
-			</p>
-
-		<% else %>
-			<% if owner? %>
-				<p>
-				<%= link_to "New post", new_blog_post_path, class: 'btn btn-success btn-block' %>
-				</p>
-			<% end %>
-
-		<% end %>
-
-		<%= render 'panels' %>
-
-</div>
+	<% end %>
+<% else %>
+	<h1>No posts yet :(</h1>
+<% end %>

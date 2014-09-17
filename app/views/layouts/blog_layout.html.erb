@@ -50,10 +50,37 @@
     <div class="container">
 
       <div class="starter-template">
+        <!-- Alerts -->
+        <% if notice %>
+          <p class="alert alert-success alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <%= notice %>
+          </p>
+        <% end %>
+        <% if alert %>
+          <p class="alert alert-danger alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <%= alert %>
+          </p>
+        <% end %>
+        <!-- End of alerts -->
 
-        <%= render 'layouts/notice' %>
+				<div class='container'>
+					<div class="well">
+						<h1 class="text-center">
+							<%= @blog.title %>
+						</h1>
+						<p class="text-center"><%= @blog.description %></p>
+					</div>
+					<div class="starter-template col-xs-12 col-md-8">
 
-        <%= yield %>
+						<%= yield %>
+					</div>
+
+					<div class="col-xs-6 col-md-4">
+						<%= render 'panels' %>
+					</div>
+				</div>
       </div>
 
     </div><!-- /.container -->

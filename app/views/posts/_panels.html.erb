@@ -1,9 +1,31 @@
+ <% if !current_user %>
+
+  <p class="alert alert-warning alert-dismissible">
+  You must be logged in to add new posts
+  </p>
+
+<% else %>
+  <% if owner? %>
+    <p>
+    <%= link_to "New post", new_blog_post_path, class: 'btn btn-success btn-block' %>
+    </p>
+  <% end %>
+
+<% end %>
+
 <div class="panel panel-primary">
   <div class="panel-heading">
-    <div class="panel-title">Panel info</div>
+    <div class="panel-title">Blog archive</div>
   </div>
-  <div class="panel-body">
-  	Panel content
+  <div class="panel-body" id="archive">
+  	<% @post_months.sort.reverse.each do |month, posts| %>
+      <p><%=h month.strftime("%B %Y") %></p>
+      <ul>
+        <% for post in posts %>
+        <li><%=h link_to post.title, blog_post_path(@blog.id, post.id) %></li>
+        <% end %>
+      </ul>
+    <% end %>
   </div>
 </div>
 

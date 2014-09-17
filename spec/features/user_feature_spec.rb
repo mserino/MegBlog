@@ -13,6 +13,7 @@ describe 'User' do
 			expect(page).to have_content 'Welcome email@megblog.com'
 		end
 	end
+	
 	context 'existing user' do
 		before do
 			User.create(email: 'test@test.com', password: '12345678', password_confirmation: '12345678')

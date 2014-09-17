@@ -17,3 +17,9 @@
 body {
 	margin-top: 60px;
 }
+ul {
+   list-style: none;
+   margin-left: 1em;
+   padding-left: 1em;
+   text-indent: -1em;
+}
