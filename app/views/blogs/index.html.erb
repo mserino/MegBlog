@@ -1,5 +1,5 @@
 <div class="center-block">
-	<div class="starter-template col-md-8">
+	<div class="starter-template col-md-12">
 	<% if current_user %>
 
 		<h1><%= link_to "Add a new blog", new_blog_path(@blog), class: 'btn btn-primary' %></h1>
@@ -17,6 +17,7 @@
 		<% if @blogs.any? %>
 			
 		<% @blogs.each do |blog| %>
+			<div class="col-md-4">
 				<div class="panel panel-purple">
 					<div class="panel-heading">
 						<div class="panel-title">
@@ -27,10 +28,10 @@
 						<p><%= blog.description %></p>
 					</div>
 				</div>
+			</div>
 			<% end %>
 
 		<% else %>
-
 			<div class="panel panel-purple">
 				<div class="panel-body">
 					<h2>No blog</h2>

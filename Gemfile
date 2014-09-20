@@ -45,6 +45,8 @@ group :development, :test do
 	gem 'database_cleaner'
 end
 
+gem "codeclimate-test-reporter", group: :test, require: nil
+
 gem 'devise'
 
 gem "factory_girl_rails", "~> 4.0"
