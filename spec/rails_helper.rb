@@ -6,6 +6,10 @@ require 'rspec/rails'
 require 'launchy'
 require 'database_cleaner'
 
+# codeclimate test coverage
+require "codeclimate-test-reporter"
+CodeClimate::TestReporter.start
+
 include Warden::Test::Helpers
 Warden.test_mode!
 
