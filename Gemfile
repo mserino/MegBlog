@@ -60,3 +60,9 @@ gem 'bootswatch-rails'
 group :production do
 	gem 'rails_12factor'
 end
+
+group :development, :test do
+	gem 'foreman'
+end
+
+gem 'mailcatcher'
